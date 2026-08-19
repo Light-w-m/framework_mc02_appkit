@@ -1,0 +1,27 @@
+name: appkit
+description: AppKit Framework
+
+config:
+  appkit:
+    strict_mode: true         # 严格模式，启用后会进行更多的错误检查
+    printf:
+      buffer_size: 256        # Printf缓冲区大小
+
+    osal:
+      timer:
+        stack_depth: 1024     # 定时器任务栈深度
+        priority: NORMAL      # 定时器任务优先级
+        refresh_interval: 1   # 定时器刷新间隔，单位：毫秒
+
+    ramfs:
+      max_block_name_len: 16  # RAMFS最大块名称长度
+
+    logger:
+      buffer_size: 64         # 日志缓冲区大小
+      level: DEBUG            # 日志级别
+      output_level: INFO      # 日志输出级别
+      publish_msg: true       # 是否通过消息发布日志
+
+    matrix:
+      use_fase_sqrt: true     # 是否使用快速平方根算法
+      use_log: true           # 是否启用矩阵日志功能

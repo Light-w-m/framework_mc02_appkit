@@ -1,0 +1,70 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/Debug/framework_mc02.elf",
+            "name": "Launch Debug",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": [
+                "${workspaceRoot}/stm32h7x_openocd.cfg"
+            ],
+            "svdFile": "${workspaceRoot}/STM32H723.svd",
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "parsed",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "polling_interval": 1,
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console",
+                    }
+                ]
+            },
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 20,
+            },
+            // "rtos": "FreeRTOS"
+        },
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/Debug/framework_mc02.elf",
+            "name": "Attach Debug",
+            "request": "attach",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": [
+                "${workspaceRoot}/stm32h7x_openocd.cfg"
+            ],
+            "svdFile": "${workspaceRoot}/STM32H723.svd",
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "raw",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 20,
+            }
+        }
+    ]
+}

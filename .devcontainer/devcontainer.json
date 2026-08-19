@@ -1,0 +1,31 @@
+{
+    "name": "Framework Build Image",
+	"build": {
+        "dockerfile": "Dockerfile"
+    },
+    "privileged": true,
+    "mounts": [
+        {
+            "source": "/dev/bus/usb",
+            "target": "/dev/bus/usb",
+            "type": "bind",
+            "consistency": "cached"
+        }
+    ],
+    "shutdownAction": "stopContainer",
+    "customizations": {
+		"vscode": {
+			"extensions": [
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools-extension-pack",
+                "mcu-debug.debug-tracker-vscode",
+                "mcu-debug.memory-view",
+                "mcu-debug.rtos-views",
+                "mcu-debug.peripheral-viewer",
+                "marus25.cortex-debug",
+                "visualstudioexptteam.vsc",
+                "ms-python.python"
+			]
+		}
+	}
+}

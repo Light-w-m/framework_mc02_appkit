@@ -1,0 +1,22 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"type": "process",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"command": "python3",
+			"args": [
+				"tools/build.py",
+				"--preset", "Debug",
+			],
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

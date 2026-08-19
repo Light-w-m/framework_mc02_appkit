@@ -1,0 +1,11 @@
+* text=auto
+
+# 防止复制入容器的文件换行符错误
+*.sources text eol=lf
+
+# 保护工程文件
+*.ioc merge=binary
+*.mxproject merge=binary
+
+# 保护消息定义文件
+msg/*.msg merge=binary

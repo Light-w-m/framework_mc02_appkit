@@ -1,0 +1,72 @@
+platform: stm32
+osal: freertos
+
+settings:
+  world:
+    gravity: 9.81   # 重力加速度，单位：m/s²
+
+  appkit:
+    strict_mode: true         # 严格模式，启用后会进行更多的错误检查
+    printf:
+      buffer_size: 256        # Printf缓冲区大小
+
+    osal:
+      timer:
+        stack_depth: 1024     # 定时器任务栈深度
+        priority: NORMAL      # 定时器任务优先级
+        refresh_interval: 1   # 定时器刷新间隔，单位：毫秒
+
+    ramfs:
+      max_block_name_len: 16  # RAMFS最大块名称长度
+
+    logger:
+      buffer_size: 64         # 日志缓冲区大小
+      level: DEBUG            # 日志级别
+      output_level: INFO      # 日志输出级别
+      publish_msg: true       # 是否通过消息发布日志
+
+    matrix:
+      use_fase_sqrt: true     # 是否使用快速平方根算法
+      use_log: true           # 是否启用矩阵日志功能
+
+  enabled_modules:
+    - bmi088
+    - dr16
+    - sbus
+  
+  bmi088:
+    thread_depth: 2048        # BMI088线程栈深度
+    calibration:
+      on_startup: true        # 是否在启动时进行校准
+      time: 8000              # 校准时间，单位：毫秒
+
+    accel:
+      odr: ODR_1600HZ         # 加速度计输出数据率
+      oversampling: OSR_1     # 加速度计过采样率
+      range: RANGE_24G        # 加速度计量程
+
+    gyro:
+      odr: ODR_2000_532_HZ    # 陀螺仪输出数据率
+      range: RANGE_2000DPS    # 陀螺仪量程
+      int3:
+        enable: true          # 是否启用INT3中断
+        mode: PUSH_PULL       # 输出模式
+        level: ACTIVE_LOW     # 输出电平
+
+  sbus:
+    frame_period_ms: 14       # SBUS帧间隔时间，单位：毫秒
+
+    range:
+      min: 352                # 最小通道值
+      mid: 1024               # 中间通道值
+      max: 1695               # 最大通道值
+
+    channel:                  # SBUS通道映射
+      rocker_l_: 0            # 左摇杆X轴通道索引
+      rocker_l1: 1            # 左摇杆Y轴通道索引
+      rocker_r_: 2            # 右摇杆X轴通道索引
+      rocker_r1: 3            # 右摇杆Y轴通道索引
+      switch_d1: 4            # 左开关通道索引
+      switch_d2: 5            # 右开关通道索引
+      switch_t1: 6            # 左拨轮通道索引
+      switch_t2: 7            # 右拨轮通道索引
