@@ -1,3 +1,8 @@
+/**
+ * @file smc.hpp
+ * @brief SMC滑膜控制器
+ * @author Light 
+ */
 #pragma once
 
 #include <common_time.hpp>
@@ -19,7 +24,7 @@ namespace algorithm
             float K{}; ///< 切换增益
             float error_eps{};///<误差下限
             float u_max{};///<输出最大值
-            float epsilon{};///<趋近率增益
+            float epsilon{};///<趋近率指数增益
             float phi{1.0f};///<滑模面厚度
 
             float gx{};///<控制器增益
