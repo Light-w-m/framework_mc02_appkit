@@ -7,5 +7,7 @@
 *.ioc merge=binary
 *.mxproject merge=binary
 
+Middlewares/** linguist-vendored
+
 # 保护消息定义文件
 msg/*.msg merge=binary
