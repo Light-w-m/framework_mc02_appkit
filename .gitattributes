@@ -7,6 +7,8 @@
 *.ioc merge=binary
 *.mxproject merge=binary
 
+Middlewares/** linguist-vendored=false
+Middlewares/** linguist-generated=false
 Drivers/** linguist-detectable=false
 
 # 保护消息定义文件
