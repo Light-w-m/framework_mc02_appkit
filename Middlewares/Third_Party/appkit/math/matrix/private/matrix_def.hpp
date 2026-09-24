@@ -38,7 +38,9 @@ namespace appkit::math
         { m.rows() } -> std::convertible_to<std::size_t>;
         { m.cols() } -> std::convertible_to<std::size_t>;
 
-        requires(m.rows() > 0 && m.cols() > 0);
+        // 这里必须用类型 Mat，不能用局部参数 m：
+        // GCC 对此放行，clang 按标准拒绝 —— 用 m 的话这个 concept 在 clang 下恒为 false，
+        requires(std::remove_cvref_t<Mat>::rows() > 0 && std::remove_cvref_t<Mat>::cols() > 0);
 
         // { m(0, 0) } -> std::convertible_to<typename Mat::value_type &>;
         { std::as_const(m)(0, 0) } -> std::convertible_to<typename Mat::value_type>;

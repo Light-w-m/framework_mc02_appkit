@@ -18,9 +18,9 @@
                 "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "D:\\VS_STM32\\gcc-arm-2021\\2021.10\\bin\\arm-none-eabi-g++",
+            "compilerPath": "D:\\VS_STM32\\gcc-arm-15.2\\bin\\arm-none-eabi-g++",
             "cStandard": "gnu17",
-            "cppStandard": "gnu++20",
+            "cppStandard": "gnu++23",
             "intelliSenseMode": "gcc-arm",
             "configurationProvider": "ms-vscode.cmake-tools"
         }

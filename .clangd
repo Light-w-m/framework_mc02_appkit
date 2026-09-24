@@ -1,0 +1,7 @@
+CompileFlags:
+  CompilationDatabase: build/Debug
+
+  Add:
+    - -Wno-unknown-attributes
+
+    - -Wno-missing-braces

@@ -62,6 +62,26 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     ${USER_SOURCES}
 )
 
+file(GLOB_RECURSE USER_HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/user/*.hpp
+)
+
+set(HEADER_CHECK_DIR ${CMAKE_CURRENT_BINARY_DIR}/header_check)
+file(MAKE_DIRECTORY ${HEADER_CHECK_DIR})
+
+set(HEADER_CHECK_SOURCES)
+foreach(USER_HEADER ${USER_HEADERS})
+    string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" HEADER_REL ${USER_HEADER})
+    string(REPLACE "/" "_" HEADER_FLAT ${HEADER_REL})
+    set(HEADER_TU ${HEADER_CHECK_DIR}/${HEADER_FLAT}.cpp)
+    file(WRITE ${HEADER_TU} "#include \"${USER_HEADER}\"\n")
+    list(APPEND HEADER_CHECK_SOURCES ${HEADER_TU})
+endforeach()
+
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+    ${HEADER_CHECK_SOURCES}
+)
+
 # Add include paths
 include(Middlewares/Third_Party/appkit/cmake/find_directory.cmake)
 recurse_find_include_directory(${CMAKE_CURRENT_SOURCE_DIR}/user USER_INCLUDE_DIRS)

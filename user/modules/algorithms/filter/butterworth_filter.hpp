@@ -1,6 +1,7 @@
 #pragma once
 
 #include <common_type.hpp>
+#include <cmath>
 #include <numbers>
 
 namespace algorithm

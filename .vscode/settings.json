@@ -1,5 +1,15 @@
 {
     "cortex-debug.variableUseNaturalFormat": true,
+
+    // ---- 语言服务：用 clangd，关掉 cpptools 的 IntelliSense ----
+    // 两家同时开着会互相打架（同一个文件两套波浪线），必须关一个
+    "C_Cpp.intelliSenseEngine": "disabled",
+
+    "clangd.arguments": [
+        "--query-driver=D:/VS_STM32/gcc-arm-15.2/bin/arm-none-eabi-*.exe",
+        "--header-insertion=never"
+    ],
+
     "files.associations": {
         "array": "cpp",
         "atomic": "cpp",
