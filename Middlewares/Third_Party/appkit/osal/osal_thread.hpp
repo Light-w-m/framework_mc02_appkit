@@ -31,7 +31,7 @@ namespace appkit::osal
         };
 
     private:
-        ThreadId handle_; ///< 任务句柄
+        ThreadId handle_{}; ///< 任务句柄
 
         /**
          * @brief

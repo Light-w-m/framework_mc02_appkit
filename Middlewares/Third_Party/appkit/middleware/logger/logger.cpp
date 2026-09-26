@@ -102,7 +102,7 @@ namespace appkit
         const auto &[timestamp, level, file, line, buffer] = msg;
 
         // 根据日志级别决定是否输出
-        if (std::to_underlying(Level::APPKIT_LOGGER_OUTPUT_LEVEL) >= std::to_underlying(level))
+        if (std::to_underlying(static_cast<Level>(APPKIT_LOGGER_OUTPUT_LEVEL_VALUE)) >= std::to_underlying(level))
         {
             if (STDIO::write_ && STDIO::write_->Writable())
             {

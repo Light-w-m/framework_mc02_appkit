@@ -136,10 +136,10 @@ namespace appkit
  */
 #ifdef APPKIT_LOGGER_BUFFER_SIZE
 #define APPKIT_LOG(level, fmt, ...) \
-    appkit::Logger::Publish(appkit::Logger::Level::level, __PROJECT_FILE_NAME__, __LINE__, fmt, ##__VA_ARGS__)
+    appkit::Logger::Publish(static_cast<appkit::Logger::Level>(level), __PROJECT_FILE_NAME__, __LINE__, fmt, ##__VA_ARGS__)
 #else
 #define APPKIT_LOG(level, fmt, ...) \
-    appkit::Logger::Publish(appkit::Logger::Level::level, __PROJECT_FILE_NAME__, __LINE__)
+    appkit::Logger::Publish(static_cast<appkit::Logger::Level>(level), __PROJECT_FILE_NAME__, __LINE__)
 #endif
 
 #define DEBUG 3
@@ -147,13 +147,23 @@ namespace appkit
 #define WARNING 1
 #define ERROR 0
 
+#if APPKIT_LOGGER_OUTPUT_LEVEL >= 3
+#define APPKIT_LOGGER_OUTPUT_LEVEL_VALUE 3
+#elif APPKIT_LOGGER_OUTPUT_LEVEL >= 2
+#define APPKIT_LOGGER_OUTPUT_LEVEL_VALUE 2
+#elif APPKIT_LOGGER_OUTPUT_LEVEL >= 1
+#define APPKIT_LOGGER_OUTPUT_LEVEL_VALUE 1
+#else
+#define APPKIT_LOGGER_OUTPUT_LEVEL_VALUE 0
+#endif
+
 /**
  * @brief 调试日志宏定义
  * @param fmt 格式化字符串
  * @param ... 可变参数
  */
 #if APPKIT_LOGGER_LEVEL >= 3
-#define APPKIT_LOG_DEBUG(fmt, ...) APPKIT_LOG(DEBUG, fmt, ##__VA_ARGS__)
+#define APPKIT_LOG_DEBUG(fmt, ...) APPKIT_LOG(3, fmt, ##__VA_ARGS__)
 #else
 #define APPKIT_LOG_DEBUG(fmt, ...)
 #endif
@@ -164,7 +174,7 @@ namespace appkit
  * @param ... 可变参数
  */
 #if APPKIT_LOGGER_LEVEL >= 2
-#define APPKIT_LOG_INFO(fmt, ...) APPKIT_LOG(INFO, fmt, ##__VA_ARGS__)
+#define APPKIT_LOG_INFO(fmt, ...) APPKIT_LOG(2, fmt, ##__VA_ARGS__)
 #else
 #define APPKIT_LOG_INFO(fmt, ...)
 #endif
@@ -175,7 +185,7 @@ namespace appkit
  * @param ... 可变参数
  */
 #if APPKIT_LOGGER_LEVEL >= 1
-#define APPKIT_LOG_WARNING(fmt, ...) APPKIT_LOG(WARNING, fmt, ##__VA_ARGS__)
+#define APPKIT_LOG_WARNING(fmt, ...) APPKIT_LOG(1, fmt, ##__VA_ARGS__)
 #else
 #define APPKIT_LOG_WARNING(fmt, ...)
 #endif
@@ -186,7 +196,7 @@ namespace appkit
  * @param ... 可变参数
  */
 #if APPKIT_LOGGER_LEVEL >= 0
-#define APPKIT_LOG_ERROR(fmt, ...) APPKIT_LOG(ERROR, fmt, ##__VA_ARGS__)
+#define APPKIT_LOG_ERROR(fmt, ...) APPKIT_LOG(0, fmt, ##__VA_ARGS__)
 #else
 #define APPKIT_LOG_ERROR(fmt, ...)
 #endif
