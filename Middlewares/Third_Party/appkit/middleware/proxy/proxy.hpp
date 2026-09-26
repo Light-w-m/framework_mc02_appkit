@@ -58,8 +58,8 @@ namespace appkit
         };
 
         LockFreeList node_list_{};           ///< 节点链表
-        SendCallback send_callback_{};       ///< 发送回调函数
         LockFreeQueue<uint8_t> *rx_queue_{}; ///< 接收队列
+        SendCallback send_callback_{};       ///< 发送回调函数
 
     public:
         /**

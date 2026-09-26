@@ -4,8 +4,9 @@
 
 namespace appkit
 {
+    // 接收队列只分配一次、随进程存活
     Proxy::Proxy(size_t rx_queue_size, const SendCallback &send_callback)
-        : send_callback_(send_callback)
+        : rx_queue_(new LockFreeQueue<uint8_t>(rx_queue_size)), send_callback_(send_callback)
     {
     }
 

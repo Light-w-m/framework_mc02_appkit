@@ -116,10 +116,11 @@ namespace appkit
 		template <typename DType>
 		FORCE_INLINE static consteval std::string_view GetName()
 		{
-			std::string_view name = PrettyFunction<DType>();
-			name.remove_prefix(sizeof("static consteval std::string_view appkit::TypeInfo::PrettyFunction() [with DType = ") - 1);
-			name.remove_suffix(sizeof("; std::string_view = std::basic_string_view<char>]") - 1);
-			return name;
+			constexpr std::string_view marker{"DType = "};
+			const std::string_view signature = PrettyFunction<DType>();
+			const std::size_t begin = signature.find(marker) + marker.size();
+			const std::size_t end = signature.find_first_of(";]", begin);
+			return signature.substr(begin, end - begin);
 		}
 
         /**

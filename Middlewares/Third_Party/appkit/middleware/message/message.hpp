@@ -262,7 +262,7 @@ namespace appkit
              */
             [[nodiscard]] FORCE_INLINE bool Available() const
             {
-                return block_.data_.state.load(std::memory_order_acquire) == AsyncSuberState::Ready;
+                return block_.GetData().state.load(std::memory_order_acquire) == AsyncSuberState::Ready;
             }
 
             /**
@@ -272,7 +272,7 @@ namespace appkit
              */
             DType &Get()
             {
-                block_.data_.state.store(AsyncSuberState::Idle, std::memory_order_release);
+                block_.GetData().state.store(AsyncSuberState::Idle, std::memory_order_release);
                 return data_;
             }
         };
