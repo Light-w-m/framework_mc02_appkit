@@ -10,7 +10,7 @@
 #include <event.hpp>
 
 #include <vector>
-#include <memory>
+// #include <memory>
 
 namespace referee
 {

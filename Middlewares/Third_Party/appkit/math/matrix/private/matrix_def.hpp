@@ -13,7 +13,7 @@
 #endif
 
 #if APPKIT_MATRIX_FORCE_OPT_MARKERS == 1
-#if defined(__GNUC__)
+#if defined(__GNUC__) && !defined(__clang__)
 #define APPKIT_MATRIX_OPT [[gnu::optimize("O2")]] FORCE_INLINE
 #else
 #define APPKIT_MATRIX_OPT FORCE_INLINE

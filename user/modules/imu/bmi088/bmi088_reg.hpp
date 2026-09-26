@@ -127,7 +127,7 @@ namespace sensor::imu
              */
             static constexpr float GetAccData(int16_t raw_data, Range range)
             {
-                static constinit const float scale_factor[4] = {3.0f / 32768.0f, 6.0f / 32768.0f, 12.0f / 32768.0f, 24.0f / 32768.0f};
+                static constexpr const float scale_factor[4] = {3.0f / 32768.0f, 6.0f / 32768.0f, 12.0f / 32768.0f, 24.0f / 32768.0f};
 
                 return raw_data * scale_factor[static_cast<uint8_t>(range)];
             }
@@ -476,7 +476,7 @@ namespace sensor::imu
              */
             static constexpr float GetGyroData(int16_t raw_data, Range range)
             {
-                static constinit const float scale_factor[5] = {
+                static constexpr const float scale_factor[5] = {
                     2000.0f / 32768.0f, 1000.0f / 32768.0f, 500.0f / 32768.0f, 250.0f / 32768.0f, 125.0f / 32768.0f};
                 return raw_data * scale_factor[static_cast<uint8_t>(range)];
             }

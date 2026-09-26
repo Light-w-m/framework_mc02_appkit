@@ -13,8 +13,8 @@ namespace appkit::math
         static_assert(Rows > 0 && Cols > 0, "Matrix dimensions must be greater than zero");
         static_assert(std::is_arithmetic_v<T>, "Matrix value type must be arithmetic");
 
-        static consteval std::size_t rows() noexcept { return Rows; }
-        static consteval std::size_t cols() noexcept { return Cols; }
+        static constexpr std::size_t rows() noexcept { return Rows; }
+        static constexpr std::size_t cols() noexcept { return Cols; }
 
         [[nodiscard]] APPKIT_MATRIX_OPT constexpr value_type &operator()(std::size_t i, std::size_t j) noexcept { return data_[i][j]; }
         [[nodiscard]] APPKIT_MATRIX_OPT constexpr const value_type &operator()(std::size_t i, std::size_t j) const noexcept { return data_[i][j]; }

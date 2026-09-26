@@ -213,8 +213,8 @@ namespace appkit::math
             return cache_.row_data(i);
         }
 
-        static consteval std::size_t rows() noexcept { return MatA::rows(); }
-        static consteval std::size_t cols() noexcept { return term_t<term_count - 1>::cols(); }
+        static constexpr std::size_t rows() noexcept { return MatA::rows(); }
+        static constexpr std::size_t cols() noexcept { return term_t<term_count - 1>::cols(); }
 
         template <MatrixLike MatNext>
         [[nodiscard]] APPKIT_MATRIX_OPT constexpr auto append(const MatNext &next) const noexcept

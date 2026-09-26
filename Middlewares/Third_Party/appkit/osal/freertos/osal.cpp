@@ -32,7 +32,7 @@ namespace appkit::osal
         }
     };
 
-    bool CheckInIsr()
+    bool CheckInIsr() noexcept
     {
         return xPortIsInsideInterrupt() != 0;
     }
@@ -99,7 +99,7 @@ extern "C"
     APPKIT_LOG_WARNING("User app_main function is not implemented");
 }
 
-[[gnu::optimize("O2")]] void *operator new(size_t size) noexcept
+[[gnu::optimize("O2")]] void *operator new(size_t size)
 {
     if (appkit::osal::osalInitFinished)
     {
@@ -108,7 +108,7 @@ extern "C"
     return pvPortMalloc(size);
 }
 
-[[gnu::optimize("O2")]] void *operator new[](size_t size) noexcept
+[[gnu::optimize("O2")]] void *operator new[](size_t size)
 {
     if (appkit::osal::osalInitFinished)
     {

@@ -24,8 +24,8 @@ namespace appkit::math
             return matrix_(j, i);
         }
 
-        static consteval std::size_t rows() noexcept { return Mat::cols(); }
-        static consteval std::size_t cols() noexcept { return Mat::rows(); }
+        static constexpr std::size_t rows() noexcept { return Mat::cols(); }
+        static constexpr std::size_t cols() noexcept { return Mat::rows(); }
 
         const Mat &matrix_;
     };

@@ -18,8 +18,8 @@ namespace appkit::math
         static_assert(MatA::rows() == MatB::rows() && MatA::cols() == MatB::cols(), "Matrix dimensions must match");
         static_assert(std::is_same_v<typename MatA::value_type, typename MatB::value_type>, "Matrix value types must match");
 
-        static consteval std::size_t rows() noexcept { return MatA::rows(); }
-        static consteval std::size_t cols() noexcept { return MatA::cols(); }
+        static constexpr std::size_t rows() noexcept { return MatA::rows(); }
+        static constexpr std::size_t cols() noexcept { return MatA::cols(); }
 
         APPKIT_MATRIX_OPT constexpr MatrixSub(const MatA &matrix_a, const MatB &matrix_b) noexcept : matrix_a_(matrix_a), matrix_b_(matrix_b) {}
 

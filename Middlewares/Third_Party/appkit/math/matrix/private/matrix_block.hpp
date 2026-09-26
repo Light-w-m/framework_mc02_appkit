@@ -86,7 +86,7 @@ namespace appkit::math
         template <MatrixLike OutMat>
         APPKIT_MATRIX_OPT constexpr void eval_to(OutMat &out) const noexcept
         {
-            static_assert(out.rows() >= BlockRows && out.cols() >= BlockCols, "Output matrix dimensions must be greater than or equal to block dimensions");
+            static_assert(std::remove_cvref_t<OutMat>::rows() >= BlockRows && std::remove_cvref_t<OutMat>::cols() >= BlockCols, "Output matrix dimensions must be greater than or equal to block dimensions");
             static_assert(std::is_same_v<typename OutMat::value_type, value_type>, "Matrix value type must match scalar type");
 
             if constexpr (requires(const MatrixBlock &m) { m.row_data(0); } && requires(OutMat &m) { m.row_data(0); })
@@ -107,8 +107,8 @@ namespace appkit::math
             }
         }
 
-        static consteval std::size_t rows() noexcept { return BlockRows; }
-        static consteval std::size_t cols() noexcept { return BlockCols; }
+        static constexpr std::size_t rows() noexcept { return BlockRows; }
+        static constexpr std::size_t cols() noexcept { return BlockCols; }
 
         Mat &matrix_;
         std::size_t start_row_ = 0;
@@ -118,8 +118,8 @@ namespace appkit::math
     template <std::size_t BlockRows, std::size_t BlockCols, std::size_t StartRow, std::size_t StartCol, MatrixLike Mat>
     APPKIT_MATRIX_OPT constexpr MatrixBlock<Mat, BlockRows, BlockCols> make_block(Mat &matrix) noexcept
     {
-        static_assert(StartRow + BlockRows <= matrix.rows(), "Block exceeds matrix row bounds");
-        static_assert(StartCol + BlockCols <= matrix.cols(), "Block exceeds matrix column bounds");
+        static_assert(StartRow + BlockRows <= std::remove_cvref_t<Mat>::rows(), "Block exceeds matrix row bounds");
+        static_assert(StartCol + BlockCols <= std::remove_cvref_t<Mat>::cols(), "Block exceeds matrix column bounds");
 
         return MatrixBlock<Mat, BlockRows, BlockCols>(matrix, StartRow, StartCol);
     }
@@ -127,8 +127,8 @@ namespace appkit::math
     template <std::size_t BlockRows, std::size_t BlockCols, std::size_t StartRow, std::size_t StartCol, MatrixLike Mat>
     APPKIT_MATRIX_OPT constexpr MatrixBlock<const Mat, BlockRows, BlockCols> make_block(const Mat &matrix) noexcept
     {
-        static_assert(StartRow + BlockRows <= matrix.rows(), "Block exceeds matrix row bounds");
-        static_assert(StartCol + BlockCols <= matrix.cols(), "Block exceeds matrix column bounds");
+        static_assert(StartRow + BlockRows <= std::remove_cvref_t<Mat>::rows(), "Block exceeds matrix row bounds");
+        static_assert(StartCol + BlockCols <= std::remove_cvref_t<Mat>::cols(), "Block exceeds matrix column bounds");
 
         return MatrixBlock<const Mat, BlockRows, BlockCols>(matrix, StartRow, StartCol);
     }
@@ -136,8 +136,8 @@ namespace appkit::math
     template <std::size_t BlockRows, std::size_t BlockCols, std::size_t StartRow, std::size_t StartCol, MatrixLike InnerMat, std::size_t OtherRows, std::size_t OtherCols>
     APPKIT_MATRIX_OPT constexpr MatrixBlock<InnerMat, BlockRows, BlockCols> make_block(MatrixBlock<InnerMat, OtherRows, OtherCols> &outer_block) noexcept
     {
-        static_assert(StartRow + BlockRows <= outer_block.rows(), "Block exceeds outer block row bounds");
-        static_assert(StartCol + BlockCols <= outer_block.cols(), "Block exceeds outer block column bounds");
+        static_assert(StartRow + BlockRows <= MatrixBlock<InnerMat, OtherRows, OtherCols>::rows(), "Block exceeds outer block row bounds");
+        static_assert(StartCol + BlockCols <= MatrixBlock<InnerMat, OtherRows, OtherCols>::cols(), "Block exceeds outer block column bounds");
 
         return MatrixBlock<InnerMat, BlockRows, BlockCols>(outer_block.matrix_, StartRow + outer_block.start_row_, StartCol + outer_block.start_col_);
     }
@@ -145,8 +145,8 @@ namespace appkit::math
     template <std::size_t BlockRows, std::size_t BlockCols, std::size_t StartRow, std::size_t StartCol, MatrixLike InnerMat, std::size_t OtherRows, std::size_t OtherCols>
     APPKIT_MATRIX_OPT constexpr MatrixBlock<const InnerMat, BlockRows, BlockCols> make_block(const MatrixBlock<InnerMat, OtherRows, OtherCols> &outer_block) noexcept
     {
-        static_assert(StartRow + BlockRows <= outer_block.rows(), "Block exceeds outer block row bounds");
-        static_assert(StartCol + BlockCols <= outer_block.cols(), "Block exceeds outer block column bounds");
+        static_assert(StartRow + BlockRows <= MatrixBlock<InnerMat, OtherRows, OtherCols>::rows(), "Block exceeds outer block row bounds");
+        static_assert(StartCol + BlockCols <= MatrixBlock<InnerMat, OtherRows, OtherCols>::cols(), "Block exceeds outer block column bounds");
 
         return MatrixBlock<const InnerMat, BlockRows, BlockCols>(outer_block.matrix_, StartRow + outer_block.start_row_, StartCol + outer_block.start_col_);
     }

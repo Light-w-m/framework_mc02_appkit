@@ -15,8 +15,8 @@ namespace appkit::math
     public:
         using value_type = typename Mat::value_type;
 
-        static consteval std::size_t rows() noexcept { return Mat::rows(); }
-        static consteval std::size_t cols() noexcept { return Mat::cols(); }
+        static constexpr std::size_t rows() noexcept { return Mat::rows(); }
+        static constexpr std::size_t cols() noexcept { return Mat::cols(); }
 
         APPKIT_MATRIX_OPT constexpr MatrixScale(const Mat &matrix, std::convertible_to<typename Mat::value_type> auto scalar) noexcept
             : matrix_(matrix), scalar_(scalar) {}

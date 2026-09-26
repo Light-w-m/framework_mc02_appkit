@@ -5,3 +5,7 @@ tools/__pycache__/
 .config.old
 
 .vscode/cbm.db
+
+database.ser
+
+.codegraph/
